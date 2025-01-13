@@ -7,10 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SeccioController
 {
-    /**
-     * @Route("/seccio/{codi}", name="dades_seccio")
-     */
-    public function seccio(string $codi): Response
+    #[Route('/seccio/{codi}', name:'dades_seccio')]
+    public function seccio($codi)
     {
         $seccions = [
             ["codi" => "1", "nom" => "Roba", "descripcio" => "Descripció de la secció", "any" => "2024", "articles" => ["Pantalons", "Camisa", "Jersey", "Xaqueta"]],
