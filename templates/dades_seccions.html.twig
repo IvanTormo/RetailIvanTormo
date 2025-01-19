@@ -20,7 +20,7 @@
                     <p>{{ seccio.paragraf }}</p>
                     <img src="{{ asset(seccio.imatge) }}" alt="Imatge de la Secció {{ codi }}" class="imatgeSeccio">
                     <br>
-                    <a href="{{ path('dades_seccions', {'codi': codi}) }}">Veure més sobre aquesta secció</a>
+                    <a href="{{ path('dades_seccio', {'codi': codi}) }}">Veure més sobre aquesta secció</a>
                 </li>
             {% endfor %}
         </ul>

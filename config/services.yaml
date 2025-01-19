@@ -6,8 +6,13 @@
 parameters:
 
 services:
+    # Registre del servei ServeiDadesSeccio
+    App\Service\ServeiDadesSeccio:
+        arguments: []
     # default configuration for services in *this* file
     _defaults:
+        bind:
+            $dadesSeccions:  '@App\Service\ServeiDadesSeccio'
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 

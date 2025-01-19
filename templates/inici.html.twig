@@ -17,4 +17,14 @@
         </p>
         <img src="{{ asset('assets/img/imatgeInici.jpg') }}" alt="Imatge d'inici" class="imatgeInici">
     </div>
+    <div class="container">
+        <h2 id="titolInici">Llistat Categories</h2>
+	<ul>
+        {% for codi, seccio in seccions %}
+            <li>
+                <a href="{{ path('dades_seccio', { codi: codi }) }}">{{ seccio.titol }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
 {% endblock %}
