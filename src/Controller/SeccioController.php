@@ -1,43 +1,83 @@
 <?php
-
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SeccioController
+class SeccioController extends AbstractController
 {
-    #[Route('/seccio/{codi}', name:'dades_seccio')]
-    public function seccio($codi)
+    #[Route('/seccio/{codi}', name: 'dades_seccions')]
+    public function dadesSeccio(string $codi): Response
     {
-        $seccions = [
-            ["codi" => "1", "nom" => "Roba", "descripcio" => "Descripció de la secció", "any" => "2024", "articles" => ["Pantalons", "Camisa", "Jersey", "Xaqueta"]],
-            ["codi" => "2", "nom" => "Electrònica", "descripcio" => "Productes tecnològics", "any" => "2024", "articles" => ["Telèfon", "Ordinador", "Televisió"]],
-            ["codi" => "3", "nom" => "Alimentació", "descripcio" => "Productes alimentaris", "any" => "2024", "articles" => ["Pa", "Llet", "Formatge"]],
-            ["codi" => "4", "nom" => "Esports", "descripcio" => "Material esportiu", "any" => "2024", "articles" => ["Pilota", "Sabatilles", "Raqueta"]],
+        // Defineix les dades segons el codi
+        $dades = [
+            '001' => [
+                'titol' => 'Tecnologia',
+                'paragraf' => 'Explora les últimes tendències en tecnologia, des de gadgets fins a innovacions en intel·ligència artificial.',
+                'imatge' => 'assets/img/tecnologia.jpg',
+            ],
+            '002' => [
+                'titol' => 'Ciència',
+                'paragraf' => 'Descobreix els avenços científics més recents i com estan canviant el nostre món, des de la biologia fins a la física quàntica.',
+                'imatge' => 'assets/img/ciencia.jpg',
+            ],
+            '003' => [
+                'titol' => 'Art i Disseny',
+                'paragraf' => "Mira les últimes creacions artístiques i el món del disseny modern, des de l'art digital fins a les exposicions més innovadores.",
+                'imatge' => 'assets/img/artidisseny.jpg',
+            ],
+            '004' => [
+                'titol' => 'Esports',
+                'paragraf' => 'Segueix les últimes novetats en el món dels esports, des de competicions internacionals fins a novetats sobre equips i atletes.',
+                'imatge' => 'assets/img/esport.jpeg',
+            ],
         ];
 
-        $seccioTrobada = null;
-        foreach ($seccions as $seccio) {
-            if ($seccio["codi"] === $codi) {
-                $seccioTrobada = $seccio;
-                break;
-            }
-        }
+        // Recupera les dades segons el codi, o un valor per defecte
+        $dadesSeccio = $dades[$codi] ?? [
+            'titol' => 'Secció no trobada',
+            'paragraf' => 'El codi de la secció no és vàlid o no existeix.',
+            'imatge' => 'img/error.png',
+        ];
 
-        if ($seccioTrobada) {
-            $detalls = sprintf(
-                "Secció trobada:<br>Codi: %s<br>Nom: %s<br>Descripció: %s<br>Any: %s<br>Articles: %s",
-                $seccioTrobada["codi"],
-                $seccioTrobada["nom"],
-                $seccioTrobada["descripcio"],
-                $seccioTrobada["any"],
-                implode(", ", $seccioTrobada["articles"])
-            );
-            return new Response($detalls);
-        } else {
-            return new Response(sprintf("No s’ha trobat la secció: %s", $codi));
-        }
+        // Renderitza la plantilla amb les dades de la secció
+        return $this->render('dades_seccio.html.twig', [
+            'dadesSeccio' => $dadesSeccio,
+        ]);
+    }
+
+    // Ruta per mostrar totes les seccions
+    #[Route('/dades_seccions', name: 'dades_seccions_llista')]
+    public function dadesSeccionsLlista(): Response
+    {
+        // Defineix les dades de totes les seccions
+        $dades = [
+            '001' => [
+                'titol' => 'Tecnologia',
+                'paragraf' => 'Explora les últimes tendències en tecnologia, des de gadgets fins a innovacions en intel·ligència artificial.',
+                'imatge' => 'assets/img/tecnologia.jpg',
+            ],
+            '002' => [
+                'titol' => 'Ciència',
+                'paragraf' => 'Descobreix els avenços científics més recents i com estan canviant el nostre món, des de la biologia fins a la física quàntica.',
+                'imatge' => 'assets/img/ciencia.jpg',
+            ],
+            '003' => [
+                'titol' => 'Art i Disseny',
+                'paragraf' => "Mira les últimes creacions artístiques i el món del disseny modern, des de l'art digital fins a les exposicions més innovadores.",
+                'imatge' => 'assets/img/artidisseny.jpg',
+            ],
+            '004' => [
+                'titol' => 'Esports',
+                'paragraf' => 'Segueix les últimes novetats en el món dels esports, des de competicions internacionals fins a novetats sobre equips i atletes.',
+                'imatge' => 'assets/img/esport.jpeg',
+            ],
+        ];
+
+        // Renderitza la plantilla amb la llista de seccions
+        return $this->render('dades_seccions.html.twig', [
+            'totesLesSeccions' => $dades,
+        ]);
     }
 }
-

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Dades de la Secció - {{ dadesSeccio.titol }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/estilsSeccio.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 id="titolSeccio">{{ dadesSeccio.titol }}</h1>
+        <p class="paragrafSeccio">
+            {{ dadesSeccio.paragraf }}
+        </p>
+        <img src="{{ asset(dadesSeccio.imatge) }}" alt="Imatge de la Secció {{ dadesSeccio.titol }}" class="imatgeSeccio">
+        <br>
+        <a href="{{ path('dades_seccions_llista') }}">Torna a la llista de categories</a>
+    </div>
+{% endblock %}

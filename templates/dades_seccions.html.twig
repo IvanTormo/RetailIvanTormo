@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Llista de Seccions
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/estilsSeccio.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Llista de Seccions</h1>
+
+        <ul>
+            {% for codi, seccio in totesLesSeccions %}
+                <li>
+                    <h2>{{ seccio.titol }}</h2>
+                    <p>{{ seccio.paragraf }}</p>
+                    <img src="{{ asset(seccio.imatge) }}" alt="Imatge de la Secció {{ codi }}" class="imatgeSeccio">
+                    <br>
+                    <a href="{{ path('dades_seccions', {'codi': codi}) }}">Veure més sobre aquesta secció</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Pàgina d'Inici
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/estilsInici.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 id="titolInici">Benvingut a la pàgina d'inici</h2>
+        <p id="paragrafInici">
+            Aquest és un text de mostra per a la pàgina d'inici. Explora els nostres continguts i serveis.
+        </p>
+        <img src="{{ asset('assets/img/imatgeInici.jpg') }}" alt="Imatge d'inici" class="imatgeInici">
+    </div>
+{% endblock %}

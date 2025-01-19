@@ -1,0 +1,12 @@
+<?php
+#[Route('/seccio/{text}' ,name:'buscar_seccio')]
+function buscar($text)
+{
+$resultat = array_filter($this->contactes,
+function($contacte) use ($text)
+{
+return strpos($contacte["nom"], $text) !== FALSE;
+});
+return $this->render('llista_seccions.html.twig',
+array('contactes' => $resultat));
+}
