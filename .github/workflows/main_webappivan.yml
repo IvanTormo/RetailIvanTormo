@@ -26,6 +26,14 @@ jobs:
         with:
           files: 'composer.json'
 
+      - name: Remove conflicting phpstan/phpdoc-parser
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: composer remove phpstan/phpdoc-parser --dev || true
+
+      - name: Force install compatible phpstan/phpdoc-parser version
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: composer require phpstan/phpdoc-parser:^1.22 --dev --with-all-dependencies
+
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
         run: |
